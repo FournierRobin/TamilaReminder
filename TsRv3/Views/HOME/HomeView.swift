@@ -1,15 +1,14 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  CoreDataTestDevLibre
 //
 //  Created by Robin Fournier on 21/05/2021.
 //
 
-
 import SwiftUI
-import CoreData
 
-struct ContentView: View {
+struct HomeView: View {
+    
     @FetchRequest(
         entity: Profile.entity(),
         sortDescriptors: []
@@ -18,15 +17,19 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        if(profile.isEmpty){
-            WelcomeView()
-        } else {
-            TabBarView()
-        }    }
+        VStack {
+            HelloName(profile: profile[0])
+                .padding(.top, 30)
+            OPTabMenu()
+        }
+    }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ZStack {
+            Background()
+            HomeView()
+        }
     }
 }

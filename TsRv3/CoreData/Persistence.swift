@@ -1,8 +1,8 @@
 //
 //  Persistence.swift
-//  TsRv3
+//  CoreDataTestDevLibre
 //
-//  Created by Robin Fournier on 22/05/2021.
+//  Created by Robin Fournier on 21/05/2021.
 //
 
 import CoreData
@@ -13,9 +13,16 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for _ in 0..<2 {
+            let newTask = Task(context: viewContext)
+            newTask.date = Date()
+            newTask.descript = "okok c'est un test"
+            newTask.id = UUID()
+            newTask.isDone = false
+            newTask.isImportant = false
+            newTask.isComplex = false
+            newTask.title = "Petit Test pour voir"
+            newTask.category = 1
         }
         do {
             try viewContext.save()
